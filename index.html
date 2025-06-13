@@ -23,7 +23,7 @@
             color: var(--text-color);
         }
         .app-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             background-color: white;
             padding: 20px;
@@ -116,7 +116,6 @@
             transform: translateY(0);
         }
         #advertisement {
-            width: 375px;
             min-height: 667px;
             margin: 20px auto;
             background-color: var(--ad-background, #ffffff);
@@ -166,7 +165,6 @@
         }
         .ad-image-container {
             width: 100%;
-            height: 200px;
             margin-bottom: 15px;
             position: relative;
             overflow: hidden;
@@ -349,7 +347,7 @@
             justify-content: center;
         }
         .design-option {
-            width: 100px;
+            width: 120px;
             height: 150px;
             border: 2px solid #ddd;
             border-radius: 8px;
@@ -417,50 +415,107 @@
         }
         
         /* أنماط التصاميم المختلفة */
-        .design-1 { display: flex; flex-direction: column; gap: 15px; }
-        .design-1 .ad-title { order: 1; }
-        .design-1 .ad-logo { order: 2; }
-        .design-1 .ad-image-container { order: 3; }
-        .design-1 .ad-details { order: 4; }
-        .design-1 .ad-description { order: 5; }
-        .design-1 .ad-contact { order: 6; }
-        .design-1 .ad-license { order: 7; }
+        .design-portrait {
+            width: 375px;
+            min-height: 667px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .design-portrait .ad-title { order: 1; }
+        .design-portrait .ad-logo { order: 2; }
+        .design-portrait .ad-image-container { 
+            order: 3;
+            height: 200px;
+        }
+        .design-portrait .ad-details { order: 4; }
+        .design-portrait .ad-description { order: 5; }
+        .design-portrait .ad-contact { order: 6; }
+        .design-portrait .ad-license { order: 7; }
 
-        .design-2 { display: flex; flex-direction: column; gap: 15px; }
-        .design-2 .ad-logo { order: 1; max-width: 120px; margin-bottom: 5px; }
-        .design-2 .ad-title { order: 2; }
-        .design-2 .ad-details { order: 3; }
-        .design-2 .ad-image-container { order: 4; height: 180px; }
-        .design-2 .ad-description { order: 5; }
-        .design-2 .ad-contact { order: 6; }
-        .design-2 .ad-license { order: 7; }
+        .design-square-no-image {
+            width: 500px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+        }
+        .design-square-no-image .ad-title { order: 1; }
+        .design-square-no-image .ad-logo { 
+            order: 2; 
+            max-width: 120px;
+            margin-bottom: 5px;
+        }
+        .design-square-no-image .ad-details { 
+            order: 3;
+            margin-bottom: 5px;
+            padding: 10px;
+        }
+        .design-square-no-image .ad-description { 
+            order: 4;
+            margin-bottom: 5px;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .design-square-no-image .ad-contact { 
+            order: 5;
+            margin-top: 5px;
+            padding: 10px;
+        }
+        .design-square-no-image .ad-license { 
+            order: 6;
+            margin-top: 5px;
+            font-size: 10px;
+        }
+        .design-square-no-image .ad-image-container {
+            display: none;
+        }
 
-        .design-3 { display: flex; flex-direction: column; gap: 15px; }
-        .design-3 .ad-image-container { order: 1; height: 220px; }
-        .design-3 .ad-title { order: 2; }
-        .design-3 .ad-logo { order: 3; max-width: 100px; margin-bottom: 0; }
-        .design-3 .ad-description { order: 4; }
-        .design-3 .ad-details { order: 5; }
-        .design-3 .ad-contact { order: 6; }
-        .design-3 .ad-license { order: 7; }
-
-        .design-4 { display: flex; flex-direction: column; gap: 15px; }
-        .design-4 .ad-title { order: 1; }
-        .design-4 .ad-image-container { order: 2; height: 190px; }
-        .design-4 .ad-description { order: 3; }
-        .design-4 .ad-details { order: 4; }
-        .design-4 .ad-logo { order: 5; max-width: 100px; }
-        .design-4 .ad-contact { order: 6; }
-        .design-4 .ad-license { order: 7; }
-
-        .design-5 { display: flex; flex-direction: column; gap: 15px; }
-        .design-5 .ad-contact { order: 1; }
-        .design-5 .ad-title { order: 2; }
-        .design-5 .ad-image-container { order: 3; }
-        .design-5 .ad-details { order: 4; }
-        .design-5 .ad-description { order: 5; }
-        .design-5 .ad-logo { order: 6; }
-        .design-5 .ad-license { order: 7; }
+        .design-square-with-image {
+            width: 500px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+        }
+        .design-square-with-image .ad-title { 
+            order: 1;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        .design-square-with-image .ad-image-container { 
+            order: 2;
+            height: 180px;
+            margin-bottom: 5px;
+        }
+        .design-square-with-image .ad-details { 
+            order: 3;
+            margin-bottom: 5px;
+            padding: 10px;
+        }
+        .design-square-with-image .ad-description { 
+            order: 4;
+            margin-bottom: 5px;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .design-square-with-image .ad-contact { 
+            order: 5;
+            margin-top: 5px;
+            padding: 10px;
+        }
+        .design-square-with-image .ad-license { 
+            order: 6;
+            margin-top: 5px;
+            font-size: 10px;
+        }
+        .design-square-with-image .ad-logo { 
+            order: 7;
+            max-width: 100px;
+            margin-bottom: 0;
+        }
 
         .section-icon {
             background: var(--primary-color);
@@ -496,6 +551,41 @@
         .app-footer a {
             color: var(--primary-color);
             text-decoration: none;
+        }
+        
+        .design-info {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        /* تحسينات للتصميم المربع */
+        .design-square .ad-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .design-square .ad-detail-item {
+            border-bottom: none;
+            margin-bottom: 5px;
+            padding: 5px 0;
+            border-bottom: 1px dotted rgba(0,0,0,0.1);
+        }
+        
+        /* تحسينات للاستجابة */
+        @media (max-width: 600px) {
+            .design-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            .design-option {
+                width: 150px;
+            }
+            #advertisement {
+                width: 100%;
+                max-width: 375px;
+            }
         }
     </style>
 </head>
@@ -623,27 +713,22 @@
                 <h2>تخصيص التصميم</h2>
             </div>
             
-            <h3><i class="fas fa-object-group"></i> (يختلف ترتيب العناصر) اختر من التصاميم الجاهزة</h3>
+            <div class="design-info">
+                <i class="fas fa-info-circle"></i> اختر الشكل المناسب للإعلان حسب الغرض منه
+            </div>
+            
             <div class="design-options">
-                <div class="design-option active" data-design="1">
+                <div class="design-option active" data-design="portrait">
                     <div class="design-preview" style="background: linear-gradient(to bottom, #ffffff, #f5f5f5);"></div>
-                    <div class="design-label">تصميم 00</div>
+                    <div class="design-label">تصميم طولي</div>
                 </div>
-                <div class="design-option" data-design="2">
+                <div class="design-option" data-design="square-no-image">
                     <div class="design-preview" style="background: linear-gradient(to bottom, #3498db, #2980b9);"></div>
-                    <div class="design-label">تصميم 01</div>
+                    <div class="design-label">مربع بدون صورة</div>
                 </div>
-                <div class="design-option" data-design="3">
+                <div class="design-option" data-design="square-with-image">
                     <div class="design-preview" style="background: linear-gradient(to bottom, #2ecc71, #27ae60);"></div>
-                    <div class="design-label">تصميم 02</div>
-                </div>
-                <div class="design-option" data-design="4">
-                    <div class="design-preview" style="background: linear-gradient(to bottom, #e74c3c, #c0392b);"></div>
-                    <div class="design-label">تصميم 03</div>
-                </div>
-                <div class="design-option" data-design="5">
-                    <div class="design-preview" style="background: linear-gradient(to bottom, #9b59b6, #8e44ad);"></div>
-                    <div class="design-label">تصميم 04</div>
+                    <div class="design-label">مربع مع صورة</div>
                 </div>
             </div>
             
@@ -679,7 +764,7 @@
         <button id="generateBtn"><i class="fas fa-magic"></i> إنشاء الإعلان</button>
 
         <!-- معاينة الإعلان -->
-        <div id="advertisement" class="hidden design-1">
+        <div id="advertisement" class="hidden design-portrait">
             <img id="adLogo" class="ad-logo" src="" alt="شعار الشركة">
             <h2 class="ad-title" id="adTitle">إعلان عقاري</h2>
             <div class="ad-image-container">
@@ -749,6 +834,7 @@
         // متغيرات لتخزين بيانات الصور
         let companyLogoData = null;
         let propertyImageData = null;
+        let currentDesign = 'portrait';
 
         // معالجة رفع شعار الشركة
         document.getElementById('companyLogoUpload').addEventListener('change', function(e) {
@@ -836,9 +922,11 @@
                 // تنشيط التصميم المحدد
                 this.classList.add('active');
                 
+                // تخزين التصميم الحالي
+                currentDesign = this.getAttribute('data-design');
+                
                 // تطبيق التصميم المحدد
-                const design = this.getAttribute('data-design');
-                applyDesignTemplate(design);
+                applyDesignTemplate(currentDesign);
             });
         });
 
@@ -847,30 +935,20 @@
             let bgColor, textColor, primaryColor;
             
             switch(design) {
-                case '1': // كلاسيكي
+                case 'portrait': // طولي
                     bgColor = '#ffffff';
                     textColor = '#333333';
                     primaryColor = '#3498db';
                     break;
-                case '2': // أزرق
+                case 'square-no-image': // مربع بدون صورة
                     bgColor = '#f5f9ff';
                     textColor = '#333333';
                     primaryColor = '#3498db';
                     break;
-                case '3': // أخضر
+                case 'square-with-image': // مربع مع صورة
                     bgColor = '#f5fff5';
                     textColor = '#333333';
                     primaryColor = '#2ecc71';
-                    break;
-                case '4': // أحمر
-                    bgColor = '#fff5f5';
-                    textColor = '#333333';
-                    primaryColor = '#e74c3c';
-                    break;
-                case '5': // بنفسجي
-                    bgColor = '#f9f5ff';
-                    textColor = '#333333';
-                    primaryColor = '#9b59b6';
                     break;
                 default:
                     bgColor = '#ffffff';
@@ -887,9 +965,7 @@
             
             // تغيير كلاس التصميم للإعلان
             const adElement = document.getElementById('advertisement');
-            designOptions.forEach((option, index) => {
-                adElement.classList.remove(`design-${index + 1}`);
-            });
+            adElement.classList.remove('design-portrait', 'design-square-no-image', 'design-square-with-image');
             adElement.classList.add(`design-${design}`);
             
             // إزالة التنشيط من جميع القوالب
