@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منشئ الإعلانات العقارية</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --text-color: #333333;
+            --background-color: #ffffff;
+            --secondary-color: #f8f9fa;
+            --accent-color: #2980b9;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            margin: 0;
+            color: var(--text-color);
+        }
+        .app-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        h1::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+        .form-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .form-section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-section h2 i {
+            font-size: 1.2em;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #7f8c8d;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Tajawal', sans-serif;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+            font-family: 'Tajawal', sans-serif;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        #advertisement {
+            width: 375px;
+            min-height: 667px;
+            margin: 20px auto;
+            background-color: var(--ad-background, #ffffff);
+            padding: 25px;
+            border: 1px solid #ddd;
+            position: relative;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            color: var(--ad-text-color, #333333);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .ad-logo {
+            max-width: 150px;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 5px;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .ad-title {
+            color: var(--ad-primary-color, #2c3e50);
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--ad-primary-color);
+            position: relative;
+        }
+        .ad-title::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--ad-primary-color);
+            border-radius: 2px;
+        }
+        .ad-image-container {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+        }
+        .ad-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .ad-details {
+            margin-bottom: 15px;
+            background: rgba(0,0,0,0.02);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .ad-detail-item {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px dotted rgba(0,0,0,0.1);
+        }
+        .ad-detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .ad-detail-label {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ad-description {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+            padding: 15px;
+            background: rgba(0,0,0,0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .ad-contact {
+            background-color: var(--ad-primary-color, #3498db);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .ad-contact div {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .preview-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #resultImage {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .file-input-button {
+            background-color: #f8f9fa;
+            border: 1px dashed #ddd;
+            color: #495057;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .file-input-button:hover {
+            background-color: #e9ecef;
+            border-color: var(--primary-color);
+        }
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .file-name {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .image-preview {
+            max-width: 100px;
+            max-height: 100px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin-top: 10px;
+            display: none;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .color-picker {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+        .color-picker label {
+            width: 140px;
+            margin-bottom: 0;
+            gap: 8px;
+        }
+        .color-picker input[type="color"] {
+            width: 50px;
+            height: 30px;
+            padding: 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .color-picker input[type="text"] {
+            width: 100px;
+            margin-right: 0;
+        }
+        .theme-presets {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .theme-preset {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .theme-preset:hover {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+        .theme-preset.active {
+            border-color: #333;
+            transform: scale(1.15);
+        }
+        .design-options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .design-option {
+            width: 100px;
+            height: 150px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+        .design-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .design-option.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+            transform: translateY(-5px);
+        }
+        .design-preview {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .design-label {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 12px;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .buttons-container button {
+            margin: 0;
+            width: auto;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .ad-license {
+            font-size: 12px;
+            margin-top: 15px;
+            text-align: center;
+            color: #7f8c8d;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        .ad-license div {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        /* أنماط التصاميم المختلفة */
+        .design-1 { display: flex; flex-direction: column; gap: 15px; }
+        .design-1 .ad-title { order: 1; }
+        .design-1 .ad-logo { order: 2; }
+        .design-1 .ad-image-container { order: 3; }
+        .design-1 .ad-details { order: 4; }
+        .design-1 .ad-description { order: 5; }
+        .design-1 .ad-contact { order: 6; }
+        .design-1 .ad-license { order: 7; }
+
+        .design-2 { display: flex; flex-direction: column; gap: 15px; }
+        .design-2 .ad-logo { order: 1; max-width: 120px; margin-bottom: 5px; }
+        .design-2 .ad-title { order: 2; }
+        .design-2 .ad-details { order: 3; }
+        .design-2 .ad-image-container { order: 4; height: 180px; }
+        .design-2 .ad-description { order: 5; }
+        .design-2 .ad-contact { order: 6; }
+        .design-2 .ad-license { order: 7; }
+
+        .design-3 { display: flex; flex-direction: column; gap: 15px; }
+        .design-3 .ad-image-container { order: 1; height: 220px; }
+        .design-3 .ad-title { order: 2; }
+        .design-3 .ad-logo { order: 3; max-width: 100px; margin-bottom: 0; }
+        .design-3 .ad-description { order: 4; }
+        .design-3 .ad-details { order: 5; }
+        .design-3 .ad-contact { order: 6; }
+        .design-3 .ad-license { order: 7; }
+
+        .design-4 { display: flex; flex-direction: column; gap: 15px; }
+        .design-4 .ad-title { order: 1; }
+        .design-4 .ad-image-container { order: 2; height: 190px; }
+        .design-4 .ad-description { order: 3; }
+        .design-4 .ad-details { order: 4; }
+        .design-4 .ad-logo { order: 5; max-width: 100px; }
+        .design-4 .ad-contact { order: 6; }
+        .design-4 .ad-license { order: 7; }
+
+        .design-5 { display: flex; flex-direction: column; gap: 15px; }
+        .design-5 .ad-contact { order: 1; }
+        .design-5 .ad-title { order: 2; }
+        .design-5 .ad-image-container { order: 3; }
+        .design-5 .ad-details { order: 4; }
+        .design-5 .ad-description { order: 5; }
+        .design-5 .ad-logo { order: 6; }
+        .design-5 .ad-license { order: 7; }
+
+        .section-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+        }
+        
+        /* تحسينات للواجهة */
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.2);
+        }
+        
+        .app-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .app-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1><i class="fas fa-home"></i> منشئ الإعلانات العقارية</h1>
+        
+        <div class="form-section">
+            <div class="form-section-title">
+                <i class="fas fa-building"></i>
+                <h2>معلومات الشركة</h2>
+            </div>
+            <div class="form-group">
+                <label for="companyLogoUpload"><i class="fas fa-image"></i> شعار الشركة</label>
+                <div class="file-input-container">
+                    <div class="file-input-button" id="companyLogoButton">
+                        <i class="fas fa-cloud-upload-alt"></i> انقر لرفع شعار الشركة
+                    </div>
+                    <input type="file" id="companyLogoUpload" class="file-input" accept="image/*">
+                </div>
+                <div class="file-name" id="companyLogoName"></div>
+                <img id="companyLogoPreview" class="image-preview">
+            </div>
+            <div class="form-group">
+                <label for="companyName"><i class="fas fa-signature"></i> اسم الشركة</label>
+                <input type="text" id="companyName" placeholder="اسم الشركة العقارية">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-section-title">
+                <i class="fas fa-info-circle"></i>
+                <h2>معلومات العقار</h2>
+            </div>
+            <div class="form-group">
+                <label for="propertyImageUpload"><i class="fas fa-camera"></i> صورة العقار</label>
+                <div class="file-input-container">
+                    <div class="file-input-button" id="propertyImageButton">
+                        <i class="fas fa-cloud-upload-alt"></i> انقر لرفع صورة العقار
+                    </div>
+                    <input type="file" id="propertyImageUpload" class="file-input" accept="image/*">
+                </div>
+                <div class="file-name" id="propertyImageName"></div>
+                <img id="propertyImagePreview" class="image-preview">
+            </div>
+            <div class="form-group">
+                <label for="propertyType"><i class="fas fa-home"></i> نوع العقار</label>
+                <select id="propertyType">
+                    <option value="شقة">شقة</option>
+                    <option value="فيلا">فيلا</option>
+                    <option value="أرض">أرض</option>
+                    <option value="عمارة">عمارة</option>
+                    <option value="محل تجاري">محل تجاري</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="propertyArea"><i class="fas fa-ruler-combined"></i> المساحة (م²)</label>
+                <input type="text" id="propertyArea" placeholder="350">
+            </div>
+            <div class="form-group">
+                <label for="propertyPrice"><i class="fas fa-tag"></i> السعر</label>
+                <input type="text" id="propertyPrice" placeholder="1,250,000 ريال">
+            </div>
+            <div class="form-group">
+                <label for="propertyRooms"><i class="fas fa-bed"></i> عدد الغرف</label>
+                <input type="text" id="propertyRooms" placeholder="5">
+            </div>
+            <div class="form-group">
+                <label for="propertyBaths"><i class="fas fa-bath"></i> عدد الحمامات</label>
+                <input type="text" id="propertyBaths" placeholder="3">
+            </div>
+            <div class="form-group">
+                <label for="propertyLocation"><i class="fas fa-map-marker-alt"></i> الموقع</label>
+                <input type="text" id="propertyLocation" placeholder="الرياض - حي النخيل">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-section-title">
+                <i class="fas fa-file-alt"></i>
+                <h2>وصف العقار</h2>
+            </div>
+            <div class="form-group">
+                <textarea id="propertyDescription" placeholder="أدخل وصفاً تفصيلياً للعقار..."></textarea>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-section-title">
+                <i class="fas fa-phone-alt"></i>
+                <h2>معلومات الاتصال</h2>
+            </div>
+            <div class="form-group">
+                <label for="contactPhone"><i class="fas fa-mobile-alt"></i> رقم الجوال</label>
+                <input type="text" id="contactPhone" placeholder="0501234567">
+            </div>
+            <div class="form-group">
+                <label for="contactWhatsapp"><i class="fab fa-whatsapp"></i> رقم واتساب (اختياري)</label>
+                <input type="text" id="contactWhatsapp" placeholder="0501234567">
+            </div>
+            <div class="form-group">
+                <label for="contactEmail"><i class="fas fa-envelope"></i> البريد الإلكتروني (اختياري)</label>
+                <input type="text" id="contactEmail" placeholder="info@example.com">
+            </div>
+            <div class="form-group">
+                <label for="licenseNumber"><i class="fas fa-file-contract"></i> رقم الرخصة (اختياري)</label>
+                <input type="text" id="licenseNumber" placeholder="رقم الرخصة">
+            </div>
+            <div class="form-group">
+                <label for="adLicense"><i class="fas fa-ad"></i> رقم الترخيص الإعلاني (اختياري)</label>
+                <input type="text" id="adLicense" placeholder="رقم الترخيص الإعلاني">
+            </div>
+            <div class="form-group">
+                <label for="contractNumber"><i class="fas fa-handshake"></i> رقم عقد الوساطة (اختياري)</label>
+                <input type="text" id="contractNumber" placeholder="رقم عقد الوساطة">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-section-title">
+                <i class="fas fa-palette"></i>
+                <h2>تخصيص التصميم</h2>
+            </div>
+            
+            <h3><i class="fas fa-object-group"></i> اختر من التصاميم الجاهزة</h3>
+            <div class="design-options">
+                <div class="design-option active" data-design="1">
+                    <div class="design-preview" style="background: linear-gradient(to bottom, #ffffff, #f5f5f5);"></div>
+                    <div class="design-label">تصميم كلاسيكي</div>
+                </div>
+                <div class="design-option" data-design="2">
+                    <div class="design-preview" style="background: linear-gradient(to bottom, #3498db, #2980b9);"></div>
+                    <div class="design-label">تصميم أزرق</div>
+                </div>
+                <div class="design-option" data-design="3">
+                    <div class="design-preview" style="background: linear-gradient(to bottom, #2ecc71, #27ae60);"></div>
+                    <div class="design-label">تصميم أخضر</div>
+                </div>
+                <div class="design-option" data-design="4">
+                    <div class="design-preview" style="background: linear-gradient(to bottom, #e74c3c, #c0392b);"></div>
+                    <div class="design-label">تصميم أحمر</div>
+                </div>
+                <div class="design-option" data-design="5">
+                    <div class="design-preview" style="background: linear-gradient(to bottom, #9b59b6, #8e44ad);"></div>
+                    <div class="design-label">تصميم بنفسجي</div>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-fill-drip"></i> اختر سريعاً من القوالب الجاهزة</h3>
+            <div class="theme-presets">
+                <div class="theme-preset active" style="background: linear-gradient(135deg, #3498db, #2c3e50);" data-bg="#ffffff" data-text="#333333" data-primary="#3498db"></div>
+                <div class="theme-preset" style="background: linear-gradient(135deg, #e74c3c, #c0392b);" data-bg="#f9f9f9" data-text="#333333" data-primary="#e74c3c"></div>
+                <div class="theme-preset" style="background: linear-gradient(135deg, #2ecc71, #27ae60);" data-bg="#ffffff" data-text="#333333" data-primary="#2ecc71"></div>
+                <div class="theme-preset" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);" data-bg="#f5f5f5" data-text="#333333" data-primary="#9b59b6"></div>
+                <div class="theme-preset" style="background: linear-gradient(135deg, #34495e, #2c3e50);" data-bg="#ffffff" data-text="#333333" data-primary="#34495e"></div>
+                <div class="theme-preset" style="background: linear-gradient(135deg, #f39c12, #e67e22);" data-bg="#ffffff" data-text="#333333" data-primary="#f39c12"></div>
+            </div>
+            
+            <div class="form-group">
+                <div class="color-picker">
+                    <label><i class="fas fa-paint-roller"></i> لون الخلفية:</label>
+                    <input type="text" id="bgColorValue" value="#ffffff" readonly>
+                    <input type="color" id="bgColorPicker" value="#ffffff">
+                </div>
+                <div class="color-picker">
+                    <label><i class="fas fa-font"></i> لون النص الأساسي:</label>
+                    <input type="text" id="textColorValue" value="#333333" readonly>
+                    <input type="color" id="textColorPicker" value="#333333">
+                </div>
+                <div class="color-picker">
+                    <label><i class="fas fa-paint-brush"></i> لون العناصر الرئيسية:</label>
+                    <input type="text" id="primaryColorValue" value="#3498db" readonly>
+                    <input type="color" id="primaryColorPicker" value="#3498db">
+                </div>
+            </div>
+        </div>
+
+        <button id="generateBtn"><i class="fas fa-magic"></i> إنشاء الإعلان</button>
+
+        <!-- معاينة الإعلان -->
+        <div id="advertisement" class="hidden design-1">
+            <img id="adLogo" class="ad-logo" src="" alt="شعار الشركة">
+            <h2 class="ad-title" id="adTitle">إعلان عقاري</h2>
+            <div class="ad-image-container">
+                <img id="adPropertyImage" class="ad-image" src="" alt="صورة العقار">
+            </div>
+            
+            <div class="ad-details">
+                <div class="ad-detail-item">
+                    <span class="ad-detail-label"><i class="fas fa-home"></i> نوع العقار:</span>
+                    <span id="adType">فيلا</span>
+                </div>
+                <div class="ad-detail-item">
+                    <span class="ad-detail-label"><i class="fas fa-ruler-combined"></i> المساحة:</span>
+                    <span id="adArea">350 م²</span>
+                </div>
+                <div class="ad-detail-item">
+                    <span class="ad-detail-label"><i class="fas fa-tag"></i> السعر:</span>
+                    <span id="adPrice">1,250,000 ريال</span>
+                </div>
+                <div class="ad-detail-item">
+                    <span class="ad-detail-label"><i class="fas fa-bed"></i> الغرف:</span>
+                    <span id="adRooms">5</span>
+                </div>
+                <div class="ad-detail-item">
+                    <span class="ad-detail-label"><i class="fas fa-bath"></i> الحمامات:</span>
+                    <span id="adBaths">3</span>
+                </div>
+                <div class="ad-detail-item">
+                    <span class="ad-detail-label"><i class="fas fa-map-marker-alt"></i> الموقع:</span>
+                    <span id="adLocation">الرياض - حي النخيل</span>
+                </div>
+            </div>
+            
+            <p class="ad-description" id="adDescription">
+                وصف العقار يظهر هنا...
+            </p>
+            
+            <div class="ad-contact">
+                <div><i class="fas fa-phone-alt"></i> للتواصل: <span id="adPhone">0501234567</span></div>
+                <div id="adWhatsapp" class="hidden"><i class="fab fa-whatsapp"></i> واتساب: <span></span></div>
+                <div id="adEmail" class="hidden"><i class="fas fa-envelope"></i> البريد: <span></span></div>
+            </div>
+            
+            <div class="ad-license">
+                <div id="adLicenseNumber" class="hidden"><i class="fas fa-file-contract"></i> رخصة: <span></span></div>
+                <div id="adAdLicense" class="hidden"><i class="fas fa-ad"></i> ترخيص إعلاني: <span></span></div>
+                <div id="adContractNumber" class="hidden"><i class="fas fa-handshake"></i> عقد وساطة: <span></span></div>
+                <span id="adCompanyName"><i class="fas fa-building"></i> <span>اسم الشركة العقارية</span></span>
+            </div>
+        </div>
+
+        <div class="preview-container hidden" id="previewContainer">
+            <h3><i class="fas fa-eye"></i> معاينة الإعلان</h3>
+            <img id="resultImage" src="" alt="الإعلان العقاري">
+            <div class="buttons-container">
+                <button id="downloadBtn"><i class="fas fa-download"></i> حفظ الصورة</button>
+                <button id="newAdBtn"><i class="fas fa-plus"></i> إنشاء إعلان جديد</button>
+            </div>
+        </div>
+        
+        <div class="app-footer">
+            <p>تم تطوير هذا التطبيق باستخدام HTML, CSS, JavaScript | &copy; 2023</p>
+        </div>
+    </div>
+
+    <script>
+        // متغيرات لتخزين بيانات الصور
+        let companyLogoData = null;
+        let propertyImageData = null;
+
+        // معالجة رفع شعار الشركة
+        document.getElementById('companyLogoUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('companyLogoName').textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    companyLogoData = event.target.result;
+                    
+                    // إنشاء صورة لمعرفة أبعادها الأصلية
+                    const img = new Image();
+                    img.onload = function() {
+                        document.getElementById('companyLogoPreview').src = companyLogoData;
+                        document.getElementById('companyLogoPreview').style.display = 'block';
+                    };
+                    img.src = companyLogoData;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // معالجة رفع صورة العقار
+        document.getElementById('propertyImageUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('propertyImageName').textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    propertyImageData = event.target.result;
+                    document.getElementById('propertyImagePreview').src = propertyImageData;
+                    document.getElementById('propertyImagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // معالجة ألوان التصميم
+        const bgColorPicker = document.getElementById('bgColorPicker');
+        const textColorPicker = document.getElementById('textColorPicker');
+        const primaryColorPicker = document.getElementById('primaryColorPicker');
+        const themePresets = document.querySelectorAll('.theme-preset');
+        const designOptions = document.querySelectorAll('.design-option');
+
+        // تحديث قيم الألوان عند التغيير
+        bgColorPicker.addEventListener('input', function() {
+            document.getElementById('bgColorValue').value = this.value;
+        });
+
+        textColorPicker.addEventListener('input', function() {
+            document.getElementById('textColorValue').value = this.value;
+        });
+
+        primaryColorPicker.addEventListener('input', function() {
+            document.getElementById('primaryColorValue').value = this.value;
+        });
+
+        // تطبيق القوالب الجاهزة
+        themePresets.forEach(preset => {
+            preset.addEventListener('click', function() {
+                // إزالة التنشيط من جميع القوالب
+                themePresets.forEach(p => p.classList.remove('active'));
+                // تنشيط القالب المحدد
+                this.classList.add('active');
+                
+                // تطبيق الألوان
+                const bgColor = this.getAttribute('data-bg');
+                const textColor = this.getAttribute('data-text');
+                const primaryColor = this.getAttribute('data-primary');
+                
+                document.getElementById('bgColorValue').value = bgColor;
+                document.getElementById('bgColorPicker').value = bgColor;
+                document.getElementById('textColorValue').value = textColor;
+                document.getElementById('textColorPicker').value = textColor;
+                document.getElementById('primaryColorValue').value = primaryColor;
+                document.getElementById('primaryColorPicker').value = primaryColor;
+            });
+        });
+
+        // تطبيق التصاميم الجاهزة
+        designOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // إزالة التنشيط من جميع التصاميم
+                designOptions.forEach(o => o.classList.remove('active'));
+                // تنشيط التصميم المحدد
+                this.classList.add('active');
+                
+                // تطبيق التصميم المحدد
+                const design = this.getAttribute('data-design');
+                applyDesignTemplate(design);
+            });
+        });
+
+        // تطبيق قالب التصميم المحدد
+        function applyDesignTemplate(design) {
+            let bgColor, textColor, primaryColor;
+            
+            switch(design) {
+                case '1': // كلاسيكي
+                    bgColor = '#ffffff';
+                    textColor = '#333333';
+                    primaryColor = '#3498db';
+                    break;
+                case '2': // أزرق
+                    bgColor = '#f5f9ff';
+                    textColor = '#333333';
+                    primaryColor = '#3498db';
+                    break;
+                case '3': // أخضر
+                    bgColor = '#f5fff5';
+                    textColor = '#333333';
+                    primaryColor = '#2ecc71';
+                    break;
+                case '4': // أحمر
+                    bgColor = '#fff5f5';
+                    textColor = '#333333';
+                    primaryColor = '#e74c3c';
+                    break;
+                case '5': // بنفسجي
+                    bgColor = '#f9f5ff';
+                    textColor = '#333333';
+                    primaryColor = '#9b59b6';
+                    break;
+                default:
+                    bgColor = '#ffffff';
+                    textColor = '#333333';
+                    primaryColor = '#3498db';
+            }
+            
+            document.getElementById('bgColorValue').value = bgColor;
+            document.getElementById('bgColorPicker').value = bgColor;
+            document.getElementById('textColorValue').value = textColor;
+            document.getElementById('textColorPicker').value = textColor;
+            document.getElementById('primaryColorValue').value = primaryColor;
+            document.getElementById('primaryColorPicker').value = primaryColor;
+            
+            // تغيير كلاس التصميم للإعلان
+            const adElement = document.getElementById('advertisement');
+            designOptions.forEach((option, index) => {
+                adElement.classList.remove(`design-${index + 1}`);
+            });
+            adElement.classList.add(`design-${design}`);
+            
+            // إزالة التنشيط من جميع القوالب
+            themePresets.forEach(p => p.classList.remove('active'));
+        }
+
+        // إنشاء الإعلان
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            // جمع البيانات من النموذج
+            const companyName = document.getElementById('companyName').value || 'شركة عقارية';
+            const propertyType = document.getElementById('propertyType').value;
+            const propertyArea = document.getElementById('propertyArea').value;
+            const propertyPrice = document.getElementById('propertyPrice').value;
+            const propertyRooms = document.getElementById('propertyRooms').value;
+            const propertyBaths = document.getElementById('propertyBaths').value;
+            const propertyLocation = document.getElementById('propertyLocation').value;
+            const propertyDescription = document.getElementById('propertyDescription').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            const contactWhatsapp = document.getElementById('contactWhatsapp').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const licenseNumber = document.getElementById('licenseNumber').value;
+            const adLicense = document.getElementById('adLicense').value;
+            const contractNumber = document.getElementById('contractNumber').value;
+            
+            // جمع ألوان التصميم
+            const bgColor = document.getElementById('bgColorPicker').value;
+            const textColor = document.getElementById('textColorPicker').value;
+            const primaryColor = document.getElementById('primaryColorPicker').value;
+
+            // تطبيق الألوان على الإعلان
+            document.getElementById('advertisement').style.setProperty('--ad-background', bgColor);
+            document.getElementById('advertisement').style.setProperty('--ad-text-color', textColor);
+            document.getElementById('advertisement').style.setProperty('--ad-primary-color', primaryColor);
+
+            // تعبئة الإعلان بالبيانات
+            const adLogo = document.getElementById('adLogo');
+            adLogo.src = companyLogoData || 'https://via.placeholder.com/150x80?text=شعار+الشركة';
+            adLogo.style.maxWidth = '150px';
+            adLogo.style.maxHeight = '80px';
+            adLogo.style.width = 'auto';
+            adLogo.style.height = 'auto';
+            
+            document.getElementById('adCompanyName').textContent = companyName;
+            document.getElementById('adPropertyImage').src = propertyImageData || 'https://via.placeholder.com/375x200?text=صورة+العقار';
+            
+            // إظهار/إخفاء العناصر حسب توفر البيانات
+            updateAdElement('adType', propertyType);
+            updateAdElement('adArea', propertyArea, ' م²');
+            updateAdElement('adPrice', propertyPrice);
+            updateAdElement('adRooms', propertyRooms);
+            updateAdElement('adBaths', propertyBaths);
+            updateAdElement('adLocation', propertyLocation);
+            updateAdElement('adDescription', propertyDescription);
+            updateAdElement('adPhone', contactPhone);
+            
+            // معلومات الاتصال الإضافية
+            updateContactElement('adWhatsapp', contactWhatsapp, 'واتساب: ');
+            updateContactElement('adEmail', contactEmail, 'البريد: ');
+            
+            // المعلومات القانونية
+            updateLicenseElement('adLicenseNumber', licenseNumber, 'رخصة: ');
+            updateLicenseElement('adAdLicense', adLicense, 'ترخيص إعلاني: ');
+            updateLicenseElement('adContractNumber', contractNumber, 'عقد وساطة: ');
+
+            // عرض الإعلان
+            document.getElementById('advertisement').classList.remove('hidden');
+
+            // إنشاء الصورة من الإعلان
+            setTimeout(() => {
+                html2canvas(document.getElementById('advertisement')).then(canvas => {
+                    const image = canvas.toDataURL('image/png');
+                    document.getElementById('resultImage').src = image;
+                    document.getElementById('previewContainer').classList.remove('hidden');
+                    
+                    // حفظ الصورة عند النقر على زر الحفظ
+                    document.getElementById('downloadBtn').addEventListener('click', function() {
+                        const link = document.createElement('a');
+                        link.download = 'إعلان-عقاري-' + Date.now() + '.png';
+                        link.href = image;
+                        link.click();
+                    });
+                });
+            }, 500);
+        });
+
+        // دالة لتحديث عناصر الإعلان مع التحقق من وجود القيمة
+        function updateAdElement(elementId, value, suffix = '') {
+            const element = document.getElementById(elementId);
+            if (value) {
+                element.textContent = value + suffix;
+                element.parentElement.classList.remove('hidden');
+            } else {
+                element.parentElement.classList.add('hidden');
+            }
+        }
+
+        // دالة لتحديث عناصر الاتصال مع التحقق من وجود القيمة
+        function updateContactElement(elementId, value, prefix = '') {
+            const element = document.getElementById(elementId);
+            if (value) {
+                element.querySelector('span').textContent = value;
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+
+        // دالة لتحديث العناصر القانونية مع التحقق من وجود القيمة
+        function updateLicenseElement(elementId, value, prefix = '') {
+            const element = document.getElementById(elementId);
+            if (value) {
+                element.querySelector('span').textContent = value;
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+
+        // زر إنشاء إعلان جديد
+        document.getElementById('newAdBtn').addEventListener('click', function() {
+            document.getElementById('previewContainer').classList.add('hidden');
+            document.getElementById('advertisement').classList.add('hidden');
+            window.scrollTo(0, 0);
+        });
+    </script>
+</body>
+</html>
